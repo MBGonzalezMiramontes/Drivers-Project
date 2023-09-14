@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 const Create = () => {
   const dispatch = useDispatch();
   const teams = useSelector((state) => state.teams);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const [state, setState] = useState({
     name: "",
@@ -80,12 +82,25 @@ const Create = () => {
       ...state,
       teams: teamNames,
     };
-    dispatch(postDriver(driverData));
+    dispatch(postDriver(driverData))
+      .then(() => {
+        setAlertMessage("Conductor creado exitosamente");
+        setShowAlert(true);
+      })
+      .catch((error) => {
+        console.error("Error al crear el conductor:", error);
+      });
   };
 
   return (
     <div className={styles.createContainer}>
       <h1>Crear nuevo Conductor</h1>
+      {showAlert && (
+        <div className={styles.alert}>
+          {alertMessage}
+          <button onClick={() => setShowAlert(false)}>Cerrar</button>
+        </div>
+      )}
 
       <form onSubmit={handleSubmit} className={styles.createForm}>
         <label>Nombre:</label>

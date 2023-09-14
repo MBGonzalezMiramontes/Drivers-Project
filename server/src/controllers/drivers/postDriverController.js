@@ -11,6 +11,12 @@ const createDriverController = async (
   teams
 ) => {
   try {
+
+    if (!name || !lastname || !description || !nationality || !dob || !teams) {
+      return res.status(400).json({
+        error: "Faltan datos obligatorios para crear un conductor.",
+      });
+    }
     // Verificar si el conductor ya existe
     const existingDriver = await Driver.findOne({
       where: {

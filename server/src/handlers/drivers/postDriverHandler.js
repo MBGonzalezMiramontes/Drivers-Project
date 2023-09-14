@@ -15,11 +15,7 @@ const createDriverHandler = async (req, res) => {
       created,
     } = req.body;
 
-    if (!name || !lastname || !description || !nationality || !dob || !teams) {
-      return res.status(400).json({
-        error: "Faltan datos obligatorios para crear un conductor.",
-      });
-    }
+    
 
     const response = await createDriverController(
       name,

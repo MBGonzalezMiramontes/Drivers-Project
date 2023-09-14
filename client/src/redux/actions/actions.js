@@ -7,14 +7,17 @@ import {
   GET_DRIVERSBYID_SUCCESS,
   SET_SEARCH_QUERY,
   SET_FILTER_BY_TEAM,
-  SET_FILTER_BY_CREATED,
+  POST_DRIVER_SUCCESS,
 } from "./actions-types";
 
 export function postDriver(state) {
-  return async function () {
+  return async function (dispatch) {
     try {
       const response = await axios.post("http://localhost:3001/drivers", state); //cuando haga el deploy hay q cambiar el deploy
-      console.log(response.data);
+      dispatch({
+        type: POST_DRIVER_SUCCESS,
+        payload: response.data,
+      });
     } catch (error) {
       console.error("Error al crear un conductor:", error);
     }

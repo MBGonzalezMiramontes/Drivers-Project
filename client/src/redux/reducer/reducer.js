@@ -20,8 +20,8 @@ let initialState = {
   driverDetails: {},
   searchQuery: "",
   searchResults: [],
-  filterByTeam: null,
-  filterByCreated: null,
+  filterByTeam: "",
+  filterByCreated: "",
 };
 
 function rootReducer(state = initialState, action) {
